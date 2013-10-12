@@ -7,7 +7,6 @@ Bit.ly offers tracking and stats on shortened URLs. Requires a bit.ly account an
 
 Use the method name as a member tag and the method's arguments as keywords to the tag. 
 Be sure to match the case shown in the documentation as the API is case-sensitive. 
-Requires [xml_tree] if xml output format specified.
 
 Sample Usage
 ------------

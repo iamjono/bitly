@@ -8,6 +8,48 @@ Bit.ly offers tracking and stats on shortened URLs. Requires a bit.ly account an
 Use the method name as a member tag and the method's arguments as keywords to the tag. 
 Be sure to match the case shown in the documentation as the API is case-sensitive. 
 
+Links
+------------
+
+API Docs: http://dev.bitly.com/links.html
+
+Lasso 9 Download: http://www.lassosoft.com/Lasso-9-Server-Download
+
+Data Members
+------------
+These data members will be populated after common link calls:
+
+`status_code`: HTTP Response Status Code
+
+`status_txt`: describes the nature of any error encountered
+
+`global_hash`: the bitly aggregate identifier
+
+`hash`: a bitly identifier for long_url which is unique to the given account.
+
+`long_url`: the longUrl parameter. This may not always be equal to the URL requested, as some URL normalization may occur (e.g., due to encoding differences, or case differences in the domain). This long_url will always be functionally identical the the request parameter. 
+
+`short_url`: refers to bitly link
+
+`new_hash`: designates if this is the first time this long_url was shortened by this user. The return value will equal 1 the first time a long_url is shortened. It will also then be added to the user history.
+
+`user_hash`: bitly user identifier
+
+`url`: the actual link that should be used, and is a unique value for the given bitly account.
+
+`created_at`: the epoch timestamp when this bitly link was created.
+
+`created_by`: the bitly username that originally shortened this link, if the link is public. Otherwise, null.
+
+`title`: the HTML page title for the destination page (when available)
+
+***		
+NOTE:
+
+See http://dev.bitly.com/formats.html for detailed descriptions of Error Codes
+
+See http://dev.bitly.com/links.html for detailed descriptions of Link API responses
+
 Sample Usage
 ------------
 ```lasso

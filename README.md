@@ -12,33 +12,56 @@ Requires [xml_tree] if xml output format specified.
 Sample Usage
 ------------
 ```lasso
-local(bit = bitly(
-    -login='xxxxxxx',
-    -apiKey='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-    )
-)
- 
-// shorten a URL
-#bit->shorten( -longUrl='http://code.google.com/p/bitly-api/wiki/ApiDocumentation')
- 
-// undocumented way to create custom short urls, i.e. this would create http://bit.ly/myshorturl
-#bit->shorten( -longUrl='http://code.google.com/p/bitly-api/wiki/ApiDocumentation', -keyword='myshorturl')
+	sys_listTypes !>> 'bitly' ? 
+		include('bitly.lasso')
+	
+	local(bit = bitly)
+	#bit->login='XXXX'
+	#bit->apiKey='XXXXXXXXXXXX'
+	
+	/* ===================================================== */
+	// shorten a URL
+	#bit->shorten(-longUrl='http://www.lassoguide.com/language/types.html?highlight=_unknowntag')
 
-// expand a short URL, takes either the full URL or just the hash
-#bit->expand( -hash='r3lsS')
-#bit->expand( -shortUrl='http://bit.ly/r3lsS')
+		// return the url
+		'Shortening "http://www.lassoguide.com/language/types.html?highlight=_unknowntag" == ' + #bit->url
 
-// get info on a short URL
-#bit->info( -hash='r3lsS')
+	/* ===================================================== */
+	// expand a short URL, takes either the full URL or just the hash
+	#bit->expand( -hash='19GQove')
 
-// use a comma separated list of keys to limit the info returned
-#bit->info( -shortUrl='http://bit.ly/r3lsS', -keys='thumbnail')
+		// return the expanded url
+		'<br>Expanding hash "19GQove" == ' + #bit->long_url
 
-// get stats on a short URL
-#bit->stats( -hash='r3lsS')
-#bit->stats( -shortUrl='http://bit.ly/r3lsS')
+	/* ===================================================== */
+	// expand a short URL, takes either the full URL or just the hash
+	#bit->expand( -shortUrl='http://bit.ly/19GQove')
 
-// show a list of error messages and codes
-#bit->errors
+		// return the expanded url
+		'<br>Expanding shortUrl "http://bit.ly/19GQove" == ' + #bit->long_url
+
+	/* ===================================================== */
+	// get info on a short URL
+	#bit->info( -hash='19GQove')
+		// info on a short URL
+		'<br><br>Info: on -hash "19GQove"'
+		'<br>Info: created_at == ' + #bit->created_at
+		'<br>Info: created_by == ' + #bit->created_by
+		'<br>Info: global_hash == ' + #bit->global_hash
+		'<br>Info: short_url == ' + #bit->short_url
+		'<br>Info: title == ' + #bit->title
+		'<br>Info: user_hash == ' + #bit->user_hash
+
+	/* ===================================================== */
+	// get info on a short URL
+	#bit->info( -shortUrl='http://bit.ly/19GQove')
+		// info on a short URL
+		'<br><br>Info: on short_url "http://bit.ly/19GQove"'
+		'<br>Info: created_at == ' + #bit->created_at
+		'<br>Info: created_by == ' + #bit->created_by
+		'<br>Info: global_hash == ' + #bit->global_hash
+		'<br>Info: short_url == ' + #bit->short_url
+		'<br>Info: title == ' + #bit->title
+		'<br>Info: user_hash == ' + #bit->user_hash
 ```
 
